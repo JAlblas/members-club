@@ -64,10 +64,6 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 
-
-
-
-
 /*
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));

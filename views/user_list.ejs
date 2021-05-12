@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% include partials/header.ejs %>
+
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %>!</p>
+
+    <ul>
+        <% user_list.forEach(function(user) { %>
+           <li> Name:<%= user.name %> Email:<%= user.email %> Member:<%= user.member %></li>
+        <% }); %> 
+    </ul>
+
+    <% include partials/footer.ejs %>
+  </body>
+</html>

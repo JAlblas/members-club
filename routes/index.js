@@ -3,11 +3,14 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
+var userController = require('../controllers/userController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Member club' });
 });
+
+router.get('/users', userController.user_list);
 
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register profile' });
@@ -25,7 +28,7 @@ router.post('/register', function(req, res, next) {
           name: name,
           email: email,
           password: hashedPassword,
-          member: false
+          member: "Member"
         }).save(err => {
           if (err) { 
             return next(err);

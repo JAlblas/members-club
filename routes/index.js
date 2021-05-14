@@ -17,6 +17,14 @@ router.get('/register', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
+  check('email')
+  .isEmail(),
+  check('password').exists(),
+  check(
+    'passwordRepeat',
+    'passwordConfirmation field must have the same value as the password field',
+  )
+
   let name = req.body.name;
   let email = req.body.email;
   let password = req.body.password;

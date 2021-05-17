@@ -1,5 +1,11 @@
-var User = require('../models/post');
+var Post = require('../models/post');
 
 exports.post_list = function(req, res) {
-    res.render('post_list', {posts: users});
+    Post.find()
+    .sort([['timestamp', 'ascending']])
+    .exec(function (err, posts) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('post_list', { title: 'Message list', post_list: posts });
+    });
 };

@@ -7,12 +7,16 @@ const { body, validationResult } = require('express-validator');
 var User = require('../models/user');
 var userController = require('../controllers/userController');
 
+var Post = require('../models/post');
+var postController = require('../controllers/postController');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Member club' });
+  res.render('index', { title: 'Member club', user: req.user });
 });
 
 router.get('/users', userController.user_list);
+router.get('/posts', postController.post_list);
 
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register profile' });

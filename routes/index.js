@@ -4,6 +4,9 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
 var User = require('../models/user');
 var userController = require('../controllers/userController');
 
@@ -16,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/users', userController.user_list);
-router.get('/posts', postController.post_list);
+router.get('/posts', passport.authenticate('basic'), postController.post_list);
 
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register profile' });

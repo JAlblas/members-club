@@ -87,6 +87,7 @@ app.post(
 );
 
 app.get("/logout", (req, res) => {
+  console.log(req.session);
   req.logout();
   res.redirect("/");
 });

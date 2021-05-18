@@ -4,14 +4,14 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const passport = require('../configPassport')
+const isLoggedIn = passport.isLoggedIn;
 
 var User = require('../models/user');
 var userController = require('../controllers/userController');
-
 var Post = require('../models/post');
 var postController = require('../controllers/postController');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/users', userController.user_list);
-router.get('/posts', passport.authenticate('basic'), postController.post_list);
+router.get('/posts', isLoggedIn, postController.post_list);
 
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register profile' });
@@ -53,5 +53,6 @@ router.post(
           });
       });
 });
+
 
 module.exports = router;

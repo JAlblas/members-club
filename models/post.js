@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var PostSchema = new Schema(
   {
     title: {type: String, required: true, maxlength: 100},
-    timestamp: {type: Date, required: true},
+    timestamp: {type: Date, required: true, default: Date.now},
     message: {type: String},
     userId: [{type: Schema.Types.ObjectId, ref: 'User'}]
   }

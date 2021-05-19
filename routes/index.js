@@ -54,5 +54,30 @@ router.post(
       });
 });
 
+router.get('/create-message', function(req, res, next) {
+  res.render('create-message', { title: 'Create new message' });
+});
+
+router.post('/create-message', 
+  body('title').exists(),
+  body('message').exists(),
+  function(req, res, next) {
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const post = new Post({
+      title: req.body.title,
+      message: req.body.message,
+      userId: req.user.id
+    }).save(err => {
+      if (err) { 
+        return next(err);
+      };
+      res.redirect("/");
+    });
+});
 
 module.exports = router;

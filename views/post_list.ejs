@@ -12,7 +12,11 @@
 
     <ul>
         <% post_list.forEach(function(post) { %>
-           <li> Title:<%= post.title %> Timestamp:<%= post.Timestamp %> Message:<%= post.message %></li>
+           <li> Title:<%= post.title %> Timestamp:<%= post.timestamp %> Message:<%= post.message %>
+            <% if (post.user.member === "Member") {%>
+                <b>Posted by: <%= post.user.name %></b>
+            <% } %>
+           </li>
         <% }); %> 
     </ul>
 

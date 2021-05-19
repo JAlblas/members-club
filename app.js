@@ -9,10 +9,6 @@ var flash = require('connect-flash');
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var postsRouter = require('./routes/posts');
-
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -23,6 +19,10 @@ const mongoDb = process.env.DB_URL;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
 
 var app = express();
 
@@ -41,10 +41,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-
 
 app.post(
   "/login",

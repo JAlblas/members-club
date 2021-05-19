@@ -54,8 +54,8 @@ router.post(
       });
 });
 
-router.get('/create-message', function(req, res, next) {
-  res.render('create-message', { title: 'Create new message' });
+router.get('/create-message', isLoggedIn, function(req, res, next) {
+  res.render('create-message', { title: 'Create new message', user: req.user });
 });
 
 router.post('/create-message', 
@@ -71,7 +71,7 @@ router.post('/create-message',
   const post = new Post({
       title: req.body.title,
       message: req.body.message,
-      userId: req.user.id
+      user: req.user.id
     }).save(err => {
       if (err) { 
         return next(err);

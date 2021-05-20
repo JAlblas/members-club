@@ -15,7 +15,7 @@ var postController = require('../controllers/postController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Member club', user: req.user });
+  res.render('index', { title: 'Member club'});
 });
 
 router.get('/users', userController.user_list);
@@ -55,33 +55,12 @@ router.post(
 });
 
 router.get('/create-message', isLoggedIn, function(req, res, next) {
-  res.render('create-message', { title: 'Create new message', user: req.user });
+  res.render('create-message', { title: 'Create new message'});
 });
 
-router.post('/create-message', 
-  body('title').exists(),
-  body('message').exists(),
-  function(req, res, next) {
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const post = new Post({
-      title: req.body.title,
-      message: req.body.message,
-      user: req.user.id
-    }).save(err => {
-      if (err) { 
-        return next(err);
-      };
-      res.redirect("/");
-    });
-});
+router.post('/create-message', postController.createMessage);
 
 router.post('/message/delete/:id', function(req, res, next) {
-  console.log("IS THIS RUNNING?")
   Post.findById(req.params.id)
   .exec(function (err, posts) {
     if (err) { return next(err); }

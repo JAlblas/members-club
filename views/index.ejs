@@ -13,8 +13,8 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %>!</p>
 
-    <% if (user) {%>
-      <h3>Welcome back <%= user.email %></h1>
+    <% if (currentUser) {%>
+      <h3>Welcome back <%= currentUser.email %></h1>
     <% } else { %>
       <h3>Please login</h1>
       <form action="/login" method="POST">

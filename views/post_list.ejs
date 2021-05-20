@@ -17,6 +17,10 @@
                 <b>Posted by: <%= post.user.name %></b>
             <% } %>
            </li>
+           <p><form method="POST" action="/message/delete/<%= post._id %>">
+            <button type="submit">Delete</button>
+            </form></p>
+           
         <% }); %> 
     </ul>
 

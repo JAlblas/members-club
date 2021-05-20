@@ -80,4 +80,19 @@ router.post('/create-message',
     });
 });
 
+router.post('/message/delete/:id', function(req, res, next) {
+  console.log("IS THIS RUNNING?")
+  Post.findById(req.params.id)
+  .exec(function (err, posts) {
+    if (err) { return next(err); }
+    console.log(posts);
+    // Author has no books. Delete object and redirect to the list of authors.
+    Post.findByIdAndRemove(req.params.id, function deletePost(err) {
+        if (err) { return next(err); }
+        // Success - go to author list
+        res.redirect('/');
+    })
+  });
+});
+
 module.exports = router;

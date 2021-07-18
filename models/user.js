@@ -3,10 +3,9 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema(
   {
-    name: {type: String, required: true, maxlength: 100},
+    username: {type: String, required: true, maxlength: 100},
     email: {type: String, required: true},
     password: {type: String},
-    member: {type: String, required: true, enum: ['No', 'Member', 'Admin'], default: 'No'},
     created: {type: Date, default: Date.now}
   }
 );

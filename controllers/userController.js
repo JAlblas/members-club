@@ -24,7 +24,7 @@ exports.registerUser = function(req, res, next) {
             return next(err);
         }
         const user = new User({
-            name: req.body.name,
+            username: req.body.name,
             email: req.body.email,
             password: hashedPassword,
             member: "Member"
